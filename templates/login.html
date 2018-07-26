@@ -5,6 +5,14 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
   <body>
+    <div class = "return">
+      <h1>Login page</h1>
+        <a href="{{url_for('showCategories')}}">
+          <button class="button" id="show-categories">
+          Show Categories
+          </button>
+        </a>
+    </div>
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <script>
       function onSignIn(googleUser) {
@@ -22,5 +30,6 @@
         console.log("ID Token: " + id_token);
       };
     </script>
+
   </body>
 </html>

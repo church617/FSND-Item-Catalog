@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<h1> Welcome [User.name here]</h1>
+		<h1> Welcome [User name here]</h1>
 	</head>
 	
 	<body>
-		{%for category in categories%}
-		<a href = "{{url_for('showItems', category_id= Category.cat_id)}}">
-			<div class ="row">
-				<div class="col-md-1"></div>
-					<div class="col-md-1 category-list">
-						<h3>{{Category.name}}</h3>
-					</div>
-				<div class="col-md-1"></div>
+		<h2>Category page</h2>
+		{% for item in categories %}
+		<tr>
+			<div>
+				<td> {{item.name}} </td>
+					<a href="{{url_for('deleteCategory')}}">
+						<button class="button" id="delete-category">
+							Delete Category
+						</button>
+					</a>
 			</div>
-		</a>
+		</tr>
 		{% endfor %}
+		<a href="{{url_for('showItems')}}">
+			<button class="button" id="show-items">
+				Show Items
+			</button>
+		</a>
+		<a href="{{url_for('newCategory')}}">
+			<button class="button" id="new-category">
+				New Category
+			</button>
+		</a>
+		<div>
+			<a href="{{url_for('login')}}">
+				<button class="button" id="login">
+					Login
+				</button>
+			</a>
+		</div>
 	</body>
-
 </html>
