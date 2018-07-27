@@ -8,6 +8,14 @@
 	<body>
 		<div>
 			<h3>Delete Item page</h3>
+				<div class="row">
+					<form action="#" method = "post">
+						<div class="form-group">
+						<label for="message">Are you sure you wish to delete this item? </label>
+						<button type="submit" id="submit" type="submit">Delete</button>
+						</div>
+					</form>
+				</div>
 				<a href="{{url_for('showItems')}}">
 					<button class="button" id="show-items">
 						Show Items

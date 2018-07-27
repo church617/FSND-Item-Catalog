@@ -7,11 +7,23 @@
 
 	<body>
 	<h3>New Category page</h3>
-		<a href="{{url_for('showCategories')}}">
-			<button class="button" id="show-categories">
-				Show Categories
-			</button>
-		</a>
+
+		<div class="row">
+			<form action="#" method = "post">
+				<div class="form-group">
+				<label for="name">Name: </label>
+				<input type="text" class="form-control" maxlength="100" name="name">
+				<button type="submit" id="submit" type="submit">Create</button>
+				</div>
+			</form>
+		</div>
+		<div>
+			<a href="{{url_for('showCategories')}}">
+				<button class="button" id="show-categories">
+					Show Categories
+				</button>
+			</a>
+		</div>
 	</body>
 
 </html>
