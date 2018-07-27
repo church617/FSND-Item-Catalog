@@ -28,12 +28,19 @@ def showCategories():
 	return render_template('category.html', categories=categories)
 
 
-@app.route('/newCategory')
+@app.route('/Category/new/', methods=['GET', 'POST'])
 def newCategory():
-	return render_template('newCategory.html')
+	if request.method == 'POST':
+		newCategory= Category(name= request.form['name'], 
+			user_token=login_session['user_token'])
+		session.add(newCategory)
+		flash('New Category %s succesfully created' % newCategory.name)
+		return redirect(url_for('category.html'))
+	else:
+		return render_template('newCategory.html')
 
 
-@app.route('/deleteCategory')
+@app.route('/Category/delete/', methods=['GET', 'POST'])
 def deleteCategory():
 	return render_template('deleteCategory.html')
 
