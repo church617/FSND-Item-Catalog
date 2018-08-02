@@ -11,10 +11,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-update = session.query(User).filter_by(name='John Wayne').one()
-print update.name
-print update.email
-print update.token
-print "\n"
-
+update = session.query(User).order_by(User.name)
+for name in update:
+	print(name)
 
