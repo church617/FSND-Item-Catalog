@@ -9,21 +9,15 @@
 		{% for item in categories %}
 		<tr>
 			<div>
-				<td> {{item.name}} </td>
-					<a href="{{url_for('deleteCategory')}}">
-						<button class="button" id="delete-category">
-							Delete Category
-						</button>
-					</a>
-					<a href="{{url_for('showItems')}}">
-						<button class="button" id="show-items">
-							Show Items
-						</button>
-					</a>
+				<td> {{item.name}} </td>					
 			</div>
 		</tr>
 		{% endfor %}
-		
+		<a href="{{url_for('showItems')}}">
+			<button class="button" id="show-items">
+				Show Items
+			</button>
+		</a>
 		<a href="{{url_for('newCategory')}}">
 			<button class="button" id="new-category">
 				New Category

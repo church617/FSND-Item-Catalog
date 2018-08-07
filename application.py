@@ -1,26 +1,41 @@
-from flask import Flask, render_template, request, redirect,jsonify, url_for, flash
+from flask import Flask, render_template, request
+from flask import redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, User, Category, Items
 from flask import session as login_session
-import random, string
+import random
+import string
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 import httplib2
 import json
 from flask import make_response
 import requests
+from sqlalchemy.pool import SingletonThreadPool
 
 app = Flask(__name__)
 
-#Connect to Database and create database session
-engine = create_engine('sqlite:///item_catalog.db')
+# Connect to Database and create database session
+engine = create_engine('sqlite:///item_catalog.db',
+                        poolclass=SingletonThreadPool)
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+@app.route('/login')
+def login():
+    state = ''.join(
+        random.choice(string.ascii_uppercase + string.digits)
+        for x in range(32))
+    login_session['state'] = state
+    # return "The current session state is %s" % login_session['state']
+    return render_template('login.html', STATE=state)
+
+
+# GConnect
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
@@ -28,8 +43,9 @@ def gconnect():
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    # Obtain authorization code
-    code = request.data
+    # Obtain authorization code, now compatible with Python3
+    request.get_data()
+    code = request.data.decode('utf-8')
 
     try:
         # Upgrade the authorization code into a credentials object
@@ -46,8 +62,12 @@ def gconnect():
     access_token = credentials.access_token
     url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
            % access_token)
+    # Submit request, parse response - Python3 compatible
     h = httplib2.Http()
-    result = json.loads(h.request(url, 'GET')[1])
+    response = h.request(url, 'GET')[1]
+    str_response = response.decode('utf-8')
+    result = json.loads(str_response)
+
     # If there was an error in the access token info, abort.
     if result.get('error') is not None:
         response = make_response(json.dumps(result.get('error')), 500)
@@ -66,25 +86,24 @@ def gconnect():
     if result['issued_to'] != CLIENT_ID:
         response = make_response(
             json.dumps("Token's client ID does not match app's."), 401)
-        print "Token's client ID does not match app's."
         response.headers['Content-Type'] = 'application/json'
         return response
 
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
-                                 200)
+        response = make_response(
+            json.dumps('Current user is already connected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
     # Store the access token in the session for later use.
-    login_session['access_token'] = credentials.access_token
+    login_session['access_token'] = access_token
     login_session['gplus_id'] = gplus_id
 
     # Get user info
     userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
-    params = {'access_token': credentials.access_token, 'alt': 'json'}
+    params = {'access_token': access_token, 'alt': 'json'}
     answer = requests.get(userinfo_url, params=params)
 
     data = answer.json()
@@ -93,11 +112,11 @@ def gconnect():
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
-    # See if a user exists, if it doesn't make a new one
-    if getUserID(login_session['email'])== null:
-    	createUser(login_session)
+    # see if user exists, if it doesn't make a new one
     user_id = getUserID(login_session['email'])
-    login_session['user_id']=user_id
+    if not user_id:
+        user_id = createUser(login_session)
+    login_session['user_id'] = user_id
 
     output = ''
     output += '<h1>Welcome, '
@@ -105,15 +124,15 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
-    print "done!"
     return output
+
+# User Helper Functions
 
 
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session[
-                   'email'], picture=login_session['picture'])
+                   'email'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
@@ -167,57 +186,52 @@ def gdisconnect():
 
 
 @app.route('/')
-@app.route('/category')
+@app.route('/category/')
 def showCategories():
-	categories = session.query(Category).order_by(asc(Category.cat_id))
-	return render_template('category.html', categories=categories)
+    categories = session.query(Category).order_by(asc(Category.cat_id))
+    if 'username' not in login_session:
+        return render_template('publicCategory.html', categories=categories)
+    else:
+        return render_template('category.html', categories=categories)
 
 
 @app.route('/Category/new/', methods=['GET', 'POST'])
 def newCategory():
-	if request.method == 'POST':
-		newCategory= Category(name= request.form['name'], 
-			user_token=login_session['user_token'])
-		session.add(newCategory)
-		flash('New Category %s succesfully created' % newCategory.name)
-		return redirect(url_for('category.html'))
-	else:
-		return render_template('newCategory.html')
+    if request.method == 'POST':
+        newCategory = Category(name=request.form['name'],
+                               user_token=login_session['user_token'])
+        session.add(newCategory)
+        flash('New Category %s succesfully created' % newCategory.name)
+        session.commit()
+        return redirect(url_for('category.html'))
+    else:
+        return render_template('newCategory.html')
 
 
 @app.route('/Category/delete/', methods=['GET', 'POST'])
 def deleteCategory():
-	return render_template('deleteCategory.html')
+    return render_template('deleteCategory.html')
+
 
 @app.route('/item')
 def showItems():
-	items = session.query(Items).order_by(asc(Items.item_id))
-	return render_template('item.html', items = items)
+    items = session.query(Items).order_by(asc(Items.item_id))
+    return render_template('item.html', items=items)
 
 
 @app.route('/newItem')
 def newItem():
-	return render_template('createItem.html')
+    return render_template('createItem.html')
 
 
 @app.route('/editItem')
 def editItem():
-	return render_template('editItem.html')
+    return render_template('editItem.html')
 
 
 @app.route('/deleteItem')
 def deleteItem():
-	return render_template('deleteItem.html')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-	state = ''.join(random.choice(string.ascii_uppercase+string.digits)for x in xrange(32))
-	login_session['state']= state
-	return render_template('login.html', STATE = state)
-
-
-
+    return render_template('deleteItem.html')
 
 
 if __name__ == '__main__':
