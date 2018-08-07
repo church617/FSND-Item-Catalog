@@ -12,13 +12,11 @@ import httplib2
 import json
 from flask import make_response
 import requests
-from sqlalchemy.pool import SingletonThreadPool
 
 app = Flask(__name__)
 
 # Connect to Database and create database session
-engine = create_engine('sqlite:///item_catalog.db',
-                        poolclass=SingletonThreadPool)
+engine = create_engine('sqlite:///item_catalog.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -185,6 +183,20 @@ def gdisconnect():
         return response
 
 
+@app.route('/category/<int:cat_id>/items/JSON')
+def categoryJSON(cat_id):
+    category=session.query(Category).filter_by(id=cat_id).one()
+    items=session.query(Items).filter_by(
+        cat_id=cat_id).all()
+    return jsonify(Items=[i.serialize for i in items])
+
+
+@app.route('/category/<int:cat_id>/items/<int:item_id>/JSON')
+def itemsJSON(cat_id, item_id):
+    item=session.query(Items).filter_by(id=item_id).one()
+    return jsonify(item=item.serialize)
+
+
 @app.route('/')
 @app.route('/category/')
 def showCategories():
@@ -203,7 +215,7 @@ def newCategory():
         session.add(newCategory)
         flash('New Category %s succesfully created' % newCategory.name)
         session.commit()
-        return redirect(url_for('category.html'))
+        return redirect(url_for('showCategories'))
     else:
         return render_template('newCategory.html')
 
