@@ -15,8 +15,11 @@ import requests
 
 app = Flask(__name__)
 
+CLIENT_ID = json.loads(
+    open('client_secrets.json', 'r').read())['web']['client_id']
+
 # Connect to Database and create database session
-engine = create_engine('sqlite:///item_catalog.db')
+engine = create_engine('sqlite:///item_catalog.db?check_same_thread=False')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -91,7 +94,7 @@ def gconnect():
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
         response = make_response(
-            json.dumps('Current user is already connected.'), 200)
+            json.dumps('Current user is already connected.' ), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -111,7 +114,7 @@ def gconnect():
     login_session['email'] = data['email']
 
     # see if user exists, if it doesn't make a new one
-    user_id = getUserID(login_session['email'])
+    user_id = getUserToken(login_session['email'])
     if not user_id:
         user_id = createUser(login_session)
     login_session['user_id'] = user_id
@@ -122,6 +125,7 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
+    output += result['status']
     flash("you are now logged in as %s" % login_session['username'])
     return output
 
@@ -134,18 +138,18 @@ def createUser(login_session):
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
-    return user.id
+    return user.token
 
 
-def getUserInfo(user_id):
-    user = session.query(User).filter_by(id=user_id).one()
+def getUserInfo(user_token):
+    user = session.query(User).filter_by(id=user_token).one()
     return user
 
 
-def getUserID(email):
+def getUserToken(email):
     try:
         user = session.query(User).filter_by(email=email).one()
-        return user.id
+        return user.token
     except:
         return None
 
@@ -197,6 +201,12 @@ def itemsJSON(cat_id, item_id):
     return jsonify(item=item.serialize)
 
 
+@app.route('/category/JSON')
+def categoriesJSON():
+    categories=session.query(Category).all()
+    return jsonify(categories=[r.serialize for r in categories])
+
+
 @app.route('/')
 @app.route('/category/')
 def showCategories():
@@ -209,9 +219,10 @@ def showCategories():
 
 @app.route('/Category/new/', methods=['GET', 'POST'])
 def newCategory():
+    user = session.query(User).filter_by(email=login_session['email']).one()
     if request.method == 'POST':
         newCategory = Category(name=request.form['name'],
-                               user_token=login_session['user_token'])
+                               user_token=user.token)
         session.add(newCategory)
         flash('New Category %s succesfully created' % newCategory.name)
         session.commit()
@@ -220,15 +231,24 @@ def newCategory():
         return render_template('newCategory.html')
 
 
-@app.route('/Category/delete/', methods=['GET', 'POST'])
+@app.route('/Category/<int:cat_id>/delete/', methods=['GET', 'POST'])
 def deleteCategory():
-    return render_template('deleteCategory.html')
+    categoryToDelete=session.query(Category).filter_by(id=cat_id).one()
+    if request.method == 'POST':
+        session.delete(categoryToDelete)
+        flash('%s Successfully deleted' % categoryToDelete.name)
+        session.commit()
+        return redirect(url_for('showCategories', cat_id=cat_id))
+    else:
+        return render_template('deleteCategory.html')
 
 
-@app.route('/item')
-def showItems():
-    items = session.query(Items).order_by(asc(Items.item_id))
-    return render_template('item.html', items=items)
+@app.route('/category/<int:cat_id>/')
+@app.route('/category/<int:cat_id>/items')
+def showItems(cat_id):
+    category= session.query(Category).filter_by(id=cat_id).one()
+    items = session.query(Items).filter+by(cat_id=cat_id).all()
+    return render_template('item.html', items=items, category=category)
 
 
 @app.route('/newItem')
@@ -244,6 +264,12 @@ def editItem():
 @app.route('/deleteItem')
 def deleteItem():
     return render_template('deleteItem.html')
+
+
+@app.route('/users')
+def showUsers():
+    users = session.query(User).order_by(asc(User.name))
+    return render_template('users.html', users=users)
 
 
 if __name__ == '__main__':
