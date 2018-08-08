@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<h1> Welcome </h1>
+	</head>
+	
+	<body>
+		<h2>List of Users</h2>
+		{% for item in users %}
+		<tr>
+			<div>
+				<td> {{item.name}} </td>
+				<td>{{item.token}}</td>
+			</div>
+		</tr>
+		{% endfor %}
+	</body>
+</html>
