@@ -16,6 +16,12 @@ session.query(Items).delete()
 session.query(User).delete()
 
 
+User1 = User(name = 'John Wayne',
+				email = 'jwayne@gmail.com',
+				token = 1)
+
+
+
 Category1 = Category(name = "Soccer")
 session.add(Category1)
 session.commit()
