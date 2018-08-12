@@ -13,7 +13,7 @@ session = DBSession()
 
 session.query(Category).delete()
 session.query(Items).delete()
-
+session.query(User).delete()
 
 
 Category1 = Category(name = "Soccer")

@@ -8,6 +8,14 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
+class User(Base):
+	__tablename__ = 'user'
+
+	name = Column(String(250), nullable = False)
+	email = Column(String(250), nullable = False, unique = True)
+	user_token = Column(Integer, primary_key = True, autoincrement = True)
+
+
 class Category(Base):
 	__tablename__ = 'category'
 
