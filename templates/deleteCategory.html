@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<h1> Welcome [User name here]</h1>
+		<h1> </h1>
 	</head>
 	
 
@@ -12,13 +12,14 @@
 						<div class="form-group">
 						<label for="message">Are you sure you wish to delete this category? </label>
 						This will also delete all items associated with this category.
-						<button type="submit" id="submit" type="submit">Delete</button>
+						<form action="{{ url_for('deleteCategory', cat_id = category.cat_id)}}" method = 'post'>
+						<button class="button" id="delete">Delete</button>
 						</div>
 					</form>
 				</div>
 		<a href="{{url_for('showCategories')}}">
 			<button class="button" id="show-categories">
-				Show Categories
+				Cancel
 			</button>
 		</a>
 	</body>

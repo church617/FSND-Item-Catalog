@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<h1> Welcome [User name here]</h1>
+		<h1> {{category.name}}</h1>
 		<h2>Items</h2>
 	</head>
 	
@@ -11,19 +11,20 @@
 		<tr>
 			<div>
 				<td> {{item.name}} : {{item.description}} </td>
-				<a href="{{url_for('editItem')}}">
-					<button class="button" id="edit-item">
-						Edit Item
-					</button>
+				<a href = "{{url_for('editItem', cat_id = category.cat_id, item_id=item.item_id)}}">
+					<button class="button" id="edit">Edit</button>
 				</a>
-				<a href="{{url_for('deleteItem')}}">
-					<button class="button" id="delete-item">
-						Delete Item
-					</button>
+				<a href = "{{url_for('deleteItem', cat_id = category.cat_id, item_id=item.item_id)}}">
+					<button class="button" id="delete">Delete</button>
 				</a>
 			</div>
 		</tr>
 		{% endfor %}
+		<div>
+			<a href="{{url_for('newItem', cat_id=category.cat_id)}}">
+				<button class="button" id="newItem"> New Item</button>
+			</a>
+		</div>
 		<div>
 		<a href="{{url_for('showCategories')}}">
 			<button class="button" id="show-categories">
@@ -32,12 +33,6 @@
 		</a>
 	</div>
 	<div>
-		<a href="{{url_for('newItem')}}">
-			<button class="button" id="create-Item">
-				New Item
-			</button>
-		</a>
-	</div>
 	</body>
 
 </html>

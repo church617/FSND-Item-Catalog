@@ -6,32 +6,29 @@
 	
 	<body>
 		<h2>Category page</h2>
-		{% for item in categories %}
+		{% for category in categories %}
 		<tr>
-			<div>
-				<a href = "{{url_for('showItems', cat_id = cat_id)}}">
-					<td> {{item.name}} </td>
+			<p>
+				<a href = "{{url_for('showItems', cat_id = category.cat_id)}}">
+					<td> {{category.name}} </td>
+				</a> 
+				<a href = "{{url_for('editCategory', cat_id = category.cat_id)}}">
+					<button class="button" id="edit">Edit</button>
 				</a>
-			</div>
+					<a href = "{{url_for('deleteCategory',cat_id = category.cat_id)}}">
+						<button class="button" id="delete">
+							Delete
+						</button>
+					</a> 
+			</p>
 		</tr>
 		{% endfor %}
-		
-		<a href="{{url_for('newCategory')}}">
-			<button class="button" id="new-category">
-				New Category
-			</button>
-		</a>
-		<div>
-			<a href="{{url_for('login')}}">
-				<button class="button" id="login">
-					Login
+		<p>
+			<a href="{{url_for('newCategory')}}">
+				<button class="button" id="new-category">
+					New Category
 				</button>
 			</a>
-			<a href="{{url_for('gdisconnect')}}">
-				<button class="button" id="logout">
-					Logout
-				</button>
-			</a>
-		</div>
+		</p>
 	</body>
 </html>
