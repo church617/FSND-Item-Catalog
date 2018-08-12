@@ -49,7 +49,10 @@ def categoryJSON():
 @app.route('/category/')
 def showCategories():
     categories = session.query(Category).all()
-    return render_template('category.html', categories=categories)
+    if 'username' not in login_session:
+        return render_template('publicCategory.html', categories=categories)
+    else:
+        return render_template('category.html', categories=categories)
 
 
 @app.route('/category/new', methods=['GET', 'POST'])
@@ -233,7 +236,6 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += result['status']
     flash("you are now logged in as %s" % login_session['username'])
     return output
 
@@ -293,6 +295,25 @@ def gdisconnect():
             json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
+
+
+# Disconnect based on provider
+@app.route('/logout')
+def logout():
+    if 'provider' in login_session:
+        gdisconnect()
+        del login_session['gplus_id']
+        del login_session['access_token']
+        del login_session['username']
+        del login_session['email']
+        del login_session['picture']
+        del login_session['user_id']
+        del login_session['provider']
+        flash("You have successfully been logged out.")
+        return redirect(url_for('showCategories'))
+    else:
+        flash("You were not logged in")
+        return redirect(url_for('showCategories'))
 
 
 if __name__ == '__main__':
