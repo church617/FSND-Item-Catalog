@@ -20,6 +20,7 @@ class Category(Base):
 
 	name = Column(String(250), nullable = False)
 	cat_id = Column(Integer, primary_key = True)
+	user_token = Column(Integer, ForeignKey('user.token'))
 
 	@property
 	def serialize(self):
@@ -37,6 +38,7 @@ class Items(Base):
 	description = Column(String(400))
 	category = relationship(Category, backref=backref('items', cascade='all, delete'))
 	cat_id = Column(Integer, ForeignKey('category.cat_id'))
+	user_token = Column(Integer, ForeignKey('user.token'))
 
 	@property
 	def serialize(self):

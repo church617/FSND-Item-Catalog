@@ -2,13 +2,18 @@
 <html>
 	<head>
 		<h1> Welcome </h1>
-			<a href="{{url_for('logout')}}">
+			<a href="{{url_for('showUsers')}}">
+				<button class="button" id="users">
+					Users
+				</button>
+			</a>
+			<a href="{{url_for('gdisconnect')}}">
 				<button class="button" id="logout">
 					Logout
 				</button>
 			</a>
 	</head>
-	
+	</head>
 	<body>
 		<h2>Category page</h2>
 		{% for category in categories %}
@@ -24,7 +29,7 @@
 						<button class="button" id="delete">
 							Delete
 						</button>
-					</a> 
+					</a>
 			</p>
 		</tr>
 		{% endfor %}

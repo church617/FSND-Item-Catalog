@@ -29,14 +29,16 @@ session.commit()
 
 Item1 = Items(name = "Football",
 				description = "A Football.",
-				cat_id = 1)
+				cat_id = 1,
+				user_token = 1)
 session.add(Item1)
 session.commit()
 
 
 Item2 = Items(name = "Soccer Ball",
 				description = "A Soccer Ball",
-				cat_id = 1)
+				cat_id = 1,
+				user_token = 1)
 session.add(Item2)
 session.commit()
 

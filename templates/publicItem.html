@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<h1> {{category.name}}</h1>
+		<h2>Items</h2>
+	</head>
+	
+
+	<body>
+		{% for item in items %}
+		<tr>
+			<div>
+				<td> {{item.name}} : {{item.description}} </td>
+		</tr>
+		{% endfor %}
+		<div>
+		<a href="{{url_for('showCategories')}}">
+			<button class="button" id="show-categories">
+				Show Categories
+			</button>
+		</a>
+	</div>
+	<div>
+	</body>
+
+</html>

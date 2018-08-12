@@ -13,9 +13,11 @@
 		<h2>Category page</h2>
 		{% for item in categories %}
 		<tr>
-			<div>
-				<td> {{item.name}} </td>					
-			</div>
+			<p>
+				<a href = "{{url_for('showItems', cat_id = item.cat_id)}}">
+					<td> {{item.name}} </td>
+				</a>
+			</p>
 		</tr>
 		{% endfor %}
 		<div>
