@@ -1,0 +1,299 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"for",
+				"ForeignKey"
+			],
+			[
+				"pr",
+				"primary_key"
+			],
+			[
+				"__",
+				"__tablename__"
+			],
+			[
+				"delete",
+				"deleteItem"
+			],
+			[
+				"re",
+				"request"
+			],
+			[
+				"cate",
+				"categoryEdit"
+			],
+			[
+				"new",
+				"newCategory"
+			],
+			[
+				"category",
+				"category"
+			],
+			[
+				"url",
+				"url_for"
+			],
+			[
+				"show",
+				"showCategories"
+			],
+			[
+				"item",
+				"item_id"
+			],
+			[
+				"cat",
+				"cat_id"
+			],
+			[
+				"items",
+				"Items"
+			],
+			[
+				"user",
+				"user_token"
+			],
+			[
+				"Bas",
+				"BaseHTTPRequestHandler"
+			],
+			[
+				"cu",
+				"currentCat"
+			],
+			[
+				"getC",
+				"getCats"
+			],
+			[
+				"octpus",
+				"octopus"
+			],
+			[
+				"get",
+				"getElementByID"
+			],
+			[
+				"img",
+				"imgSrc"
+			],
+			[
+				"click",
+				"clickCount"
+			],
+			[
+				"back",
+				"background-position\tproperty"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 157.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/item.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/publicCategory.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/category.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/database_setup.py",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/database_populate.py",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/publicItem.html",
+		"/C/Users/Main/Desktop/Item Catalog/application.py",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/login.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/users.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/client_secrets.json",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/editCategory.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/newCategory.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/deleteCategory.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/application.py",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/database_edit.py",
+		"/C/Users/Main/Desktop/API's/Knockout/js/app.js",
+		"/C/Users/Main/Desktop/API's/Knockout/index.html",
+		"/C/Users/Main/Desktop/catalog checklist.txt",
+		"/C/Users/Main/Desktop/API's/Knockout/js/lib/knockout-3.2.0.js",
+		"/C/Users/Main/Desktop/API's/Knockout/app.js",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/createItem.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/login2.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/database_setup_noUsers.py",
+		"/C/Users/Main/Desktop/OAuth/OAuth2.0/project.py",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/deleteItem.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/editItem.html",
+		"/C/Users/Main/Desktop/application.py",
+		"/C/Users/Main/Desktop/OAuth/OAuth2.0/templates/menu.html",
+		"/C/Users/Main/Desktop/OAuth/OAuth2.0/templates/restaurants.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/edititem.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/deleteitem.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/templates/createitem.html",
+		"/C/Users/Main/Desktop/OAuth/OAuth2.0/webserver.py",
+		"/C/Users/Main/Desktop/OAuth/OAuth2.0/database_setup.py",
+		"/C/Users/Main/Desktop/OAuth/OAuth2.0/templates/main.html",
+		"/C/Users/Main/Desktop/OAuth/OAuth2.0/templates/header.html",
+		"/C/Users/Main/Desktop/FSND-Item-Catalog/catalog/README.txt",
+		"/C/Users/Main/Desktop/get-pip.py",
+		"/C/Users/Main/Desktop/hello.py",
+		"/C/Users/Main/Desktop/hello.pyc",
+		"/C/Users/Main/Desktop/API's/catclicker/css/style.css",
+		"/C/Users/Main/Desktop/API's/minicourse-ajax-project/css/style.css",
+		"/C/Users/Main/Desktop/API's/minicourse-ajax-project/index.html",
+		"/C/Users/Main/Desktop/API's/minicourse-ajax-project/js/script.js",
+		"/C/Users/Main/Downloads/Aimersoft Ultimate 4.0.2/key.txt",
+		"/C/Users/Main/Desktop/API's/catclicker/index.html",
+		"/C/Users/Main/Desktop/Item Catalog/main.py"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "application.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
