@@ -190,7 +190,7 @@ def login():
     return render_template('login.html', STATE=state)
 
 
-# GConnect
+# GConnect, Code snippet provided by Udacity via the Full-Stack Restaurant Menu app
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
@@ -311,6 +311,7 @@ def getUserToken(email):
 
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
+# Code snippet provided by Udacity by way of the Full-Stack Restaurant menu app
 @app.route('/gdisconnect')
 def gdisconnect():
         # Only disconnect a connected user.
