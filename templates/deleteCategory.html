@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="./css/styles.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 	</head>
 	
 
 	<body>
-	<h3>Delete Category page</h3>
+	<h1>Delete Category page</h1>
 		<div class="row">
 					<form action="#" method = "post">
 						<div class="form-group">
@@ -17,11 +17,9 @@
 						</div>
 					</form>
 				</div>
-		<a href="{{url_for('showCategories')}}">
-			<button class="button" id="show-categories">
-				Cancel
-			</button>
-		</a>
+						<p>
+							<a href = '{{url_for('showCategories')}}'> Cancel </a>
+						</p>
 	</body>
 
 </html>

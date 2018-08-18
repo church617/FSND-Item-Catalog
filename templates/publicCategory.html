@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 	<head>
 		<link rel="stylesheet" href="./css/styles.css">
 		<h1> Welcome </h1>
@@ -11,7 +12,7 @@
 	</head>
 	
 	<body>
-		<h2>Category page</h2>
+		<h3>Category page</h3>
 		{% for item in categories %}
 		<tr>
 			<p>

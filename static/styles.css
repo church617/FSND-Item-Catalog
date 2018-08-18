@@ -1,0 +1,65 @@
+h1 {
+	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 50px;
+	color: #ff0000;
+	line-height: 60px;
+	font-weight: 300;
+}
+
+h2{
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+h3 {
+	font-size: 18px;
+	color: #ff0000;
+	line-height: 23px;
+}
+
+p {
+ 	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
+ 	font-size: 16px;
+ 	color: #7B7573;
+ 	line-height: 24px;
+ 	font-weight: 400;
+ 	text-align: center;
+ 	padding-bottom: 50px;
+			}
+
+#logout{
+	position: absolute;
+	left:90%;
+	top:5%;
+	padding: 20px;
+	margin: 0;
+	border-color: #9FB80A;
+	border-width: 2px;
+	color: #9FB80A;;
+}
+
+#login{
+	position: absolute;
+	left:90%;
+	top:5%;
+	padding: 20px;
+	margin: 0;
+	border-color: #9FB80A;
+	border-width: 2px;
+	color: #9FB80A;;
+}
+
+.form-group{
+	padding-bottom: 10px;
+}
+
+.row{
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+div{
+	text-align: center;
+	padding-bottom: 10px;
+}
+

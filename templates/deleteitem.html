@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
-	<link rel="stylesheet" href="./css/styles.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 	<body>
 		<div>
-			<h3>Delete Item page</h3>
+			<h1>Delete Item</h1>
 				<div class="row">
 					<form action="#" method = "post">
 						<div class="form-group">
-						<label for="message">Are you sure you wish to delete this item? </label>
-						<button type="submit" id="submit" type="submit">Delete</button>
+							<label for="message">Are you sure you wish to delete this item? </label>
+							<button type="submit" id="submit" type="submit">Delete</button>
 						</div>
+						<p>
+							<a href = '{{url_for('showCategories')}}'> Cancel </a>
+						</p>
 					</form>
 				</div>
 		</div>

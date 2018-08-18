@@ -28,7 +28,7 @@ session.commit()
 
 
 Item1 = Items(name = "Football",
-				description = "A Football.",
+				description = "A football. Used to play the game of Soccer",
 				cat_id = 1,
 				user_token = 1)
 session.add(Item1)
@@ -36,7 +36,7 @@ session.commit()
 
 
 Item2 = Items(name = "Soccer Ball",
-				description = "A Soccer Ball",
+				description = "A name used primarily in America, also used to play Soccer.",
 				cat_id = 1,
 				user_token = 1)
 session.add(Item2)

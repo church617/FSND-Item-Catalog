@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="./css/styles.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 	</head>
 	
 
 	<body>
-	<h3>New Category page</h3>
+	<h1>New Category</h1>
+	<p>
+		Please enter the name of your category
+	</p>
 
 		<div class="row">
 			<form action="#" method = "post">
+				<p>
 				<div class="form-group">
 				<label for="name">Name: </label>
 				<input type="text" class="form-control" maxlength="100" name="name">
 				<button type="submit" id="submit" type="submit">Create</button>
 				</div>
+			</p>
 			</form>
 		</div>
 		<div>

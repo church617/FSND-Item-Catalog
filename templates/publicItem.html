@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
 		<h1> {{category.name}}</h1>
-		<h2>Items</h2>
+		<h3>Items</h3>
 	</head>
 	
 
 	<body>
 		{% for item in items %}
 		<tr>
-			<div>
+			<p>
 				<td> {{item.name}} : {{item.description}} </td>
 		</tr>
 		{% endfor %}
@@ -21,7 +22,7 @@
 			</button>
 		</a>
 	</div>
-	<div>
+	</p>
 	</body>
 
 </html>
